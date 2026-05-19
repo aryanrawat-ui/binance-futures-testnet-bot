@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 import argparse
 from decimal import Decimal, InvalidOperation
 
@@ -9,25 +8,19 @@ VALID_ORDER_TYPES = {"MARKET", "LIMIT", "STOP_MARKET"}
 
 def validate_symbol(symbol: str) -> str:
     s = symbol.strip().upper()
-
     if len(s) < 3:
         raise argparse.ArgumentTypeError(
             f"Symbol '{symbol}' is too short. Use something like BTCUSDT."
         )
-
     return s
-
 
 def validate_side(side: str) -> str:
     s = side.strip().upper()
-
     if s not in VALID_SIDES:
         raise argparse.ArgumentTypeError(
             f"Side must be one of {sorted(VALID_SIDES)}, got '{side}'."
         )
-
     return s
-
 
 def validate_order_type(order_type: str) -> str:
     t = order_type.strip().upper()
@@ -37,19 +30,16 @@ def validate_order_type(order_type: str) -> str:
             f"Order type must be one of "
             f"{sorted(VALID_ORDER_TYPES)}, got '{order_type}'."
         )
-
     return t
 
 
 def validate_quantity(qty: str) -> float:
     try:
         value = Decimal(qty)
-
         if value <= 0:
             raise argparse.ArgumentTypeError(
                 "Quantity must be greater than 0."
             )
-
         return float(value)
 
     except InvalidOperation:
@@ -67,7 +57,6 @@ def validate_price(price: str) -> float:
             raise argparse.ArgumentTypeError(
                 "Price must be greater than 0."
             )
-
         return float(value)
 
     except InvalidOperation:
