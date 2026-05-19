@@ -5,7 +5,6 @@ import time
 from typing import Any
 from urllib.parse import urlencode
 import requests
-
 from .logging_config import setup_logger
 
 BASE_URL = "https://testnet.binancefuture.com"
