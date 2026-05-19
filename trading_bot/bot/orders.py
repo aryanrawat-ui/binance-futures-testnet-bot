@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 from .client import BinanceClient
 from .logging_config import setup_logger
 
@@ -13,7 +12,6 @@ def _base_params(symbol: str, side: str, quantity: float) -> dict:
         "quantity": quantity,
     }
 
-
 def place_market_order(
     client: BinanceClient,
     symbol: str,
@@ -22,13 +20,9 @@ def place_market_order(
 ) -> dict:
 
     params = _base_params(symbol, side, quantity)
-
     params["type"] = "MARKET"
-
     logger.debug("Market order params: %s", params)
-
     return client.place_order(**params)
-
 
 def place_limit_order(
     client: BinanceClient,
@@ -59,14 +53,10 @@ def place_stop_market_order(
 ) -> dict:
 
     params = _base_params(symbol, side, quantity)
-
     params["type"] = "STOP_MARKET"
     params["stopPrice"] = stop_price
-
     logger.debug("Stop-market order params: %s", params)
-
     return client.place_order(**params)
-
 
 def format_order_response(response: dict) -> str:
 
